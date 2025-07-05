@@ -47,7 +47,8 @@ const createUser = async (req: Request, res: Response) => {
   // cookie
   const options = {
     httpOnly: true,
-    secure: false,
+    secure: true,
+    sameSite: "none" as const,
   };
 
   res.status(200).cookie("accessToken", accessToken, options).json({
@@ -87,9 +88,9 @@ const loginUser = async (req: Request, res: Response) => {
 
   // cookie
   const options = {
-    httpOnly: false,
+    httpOnly: true,
     secure: true,
-    sameSite: "lax" as const,
+    sameSite: "none" as const,
   };
 
   res.status(200).cookie("accessToken", accessToken, options).json({
@@ -104,6 +105,7 @@ const logout = async (req: Request, res: Response) => {
   const options = {
     httpOnly: true,
     secure: true,
+    sameSite: "none" as const,
   };
 
   res.status(200).clearCookie("accessToken", options).json({

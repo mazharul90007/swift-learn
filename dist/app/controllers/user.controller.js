@@ -48,7 +48,8 @@ const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     // cookie
     const options = {
         httpOnly: true,
-        secure: false,
+        secure: true,
+        sameSite: "none",
     };
     res.status(200).cookie("accessToken", accessToken, options).json({
         success: true,
@@ -81,9 +82,9 @@ const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
     // cookie
     const options = {
-        httpOnly: false,
+        httpOnly: true,
         secure: true,
-        sameSite: "lax",
+        sameSite: "none",
     };
     res.status(200).cookie("accessToken", accessToken, options).json({
         success: true,
@@ -97,6 +98,7 @@ const logout = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const options = {
         httpOnly: true,
         secure: true,
+        sameSite: "none",
     };
     res.status(200).clearCookie("accessToken", options).json({
         success: true,
